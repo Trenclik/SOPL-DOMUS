@@ -1,10 +1,9 @@
 <script>
-  import Input from '$lib/Components/Input.svelte';
   import Button from '$lib/Components/Button.svelte';
 
-  let newPassword = '';
-  let confirmPassword = '';
-  let passwordError = '';
+  let newPassword = $state('');
+  let confirmPassword = $state('');
+  let passwordError = $state('');
 
   function validateForm() {
     let isValid = true;
@@ -24,7 +23,8 @@
     return isValid;
   }
 
-  function handleSubmit() {
+  function handleSubmit(event) {
+    event.preventDefault();
     if (validateForm()) {
       console.log('Nové heslo:', newPassword);
       alert('Heslo bylo změněno!');
@@ -32,18 +32,23 @@
       // goto('/login');  // Nezapomeň na přesměrování, až to bude fungovat
     }
   }
+
+  const goBack = () => {
+    window.history.back();
+  };
 </script>
 
 <div class="login-container">
   <div class="login-box">
+    <button class="back-arrow" onclick={goBack} aria-label="Go back">&larr;</button>
     <h2>Zadejte nové heslo</h2>
     <p>Pro dokončení změny hesla zadejte nové heslo a potvrďte ho.</p>
 
-    <form on:submit|preventDefault={handleSubmit}>
+    <form onsubmit={handleSubmit}>
       <!-- Použití Input komponenty pro pole hesla -->
-      <Input label="Nové heslo" type="password" placeholder="Zadejte nové heslo" value={newPassword} on:input={(e) => (newPassword = e.target.value)} />
+      <input label="Nové heslo" type="password" placeholder="Zadejte nové heslo" value={newPassword} oninput={(e) => (newPassword = e.target.value)} />
       
-      <Input label="Potvrďte heslo" type="password" placeholder="Potvrďte nové heslo" value={confirmPassword} on:input={(e) => (confirmPassword = e.target.value)} />
+      <input label="Potvrďte heslo" type="password" placeholder="Potvrďte nové heslo" value={confirmPassword} oninput={(e) => (confirmPassword = e.target.value)} />
 
       {#if passwordError}<p class="error-message">{passwordError}</p>{/if}
 
@@ -54,44 +59,102 @@
 
 <style lang="scss">
   .login-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     height: 100vh;
-    background-color: #f5f5f5;
+    background-color: white;
 
     .login-box {
       background-color: #fff;
-      padding: 20px;
+      padding: 25px;
       border-radius: 8px;
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-      width: 300px;
+      width: 320px;
       text-align: center;
+      display: grid;
+      gap: 15px;
+      position: relative;
+
+      .back-arrow {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #4a90e2;
+        background: none;
+        border: none;
+        transition: color 0.3s, background-color 0.3s;
+
+        &:hover {
+          color: #fff;
+          background-color: #4a90e2;
+        }
+      }
 
       h2 {
         margin-bottom: 20px;
+        font-size: 22px;
+        color: #333;
       }
 
       .error-message {
-        color: red;
-        margin-bottom: 10px;
+        color: #d9534f;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      input {
+        padding: 12px;
+        margin: 10px auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+        width: calc(100% - 40px); /* Odsazení 20px z každé strany */
+        max-width: 250px;
+
+        &:focus {
+          border-color: #4a90e2;
+          outline: none;
+          box-shadow: 0 0 4px rgba(74, 144, 226, 0.3);
+          background-color: #ffffff;
+        }
       }
 
       button {
         background-color: #4A90E2;
         color: #fff;
         border: none;
-        padding: 10px 20px;
+        padding: 12px 20px;
         border-radius: 5px;
         cursor: pointer;
         font-size: 16px;
         margin-top: 20px;
+        transition: background-color 0.3s;
 
         &:hover {
           background-color: #357ABD;
         }
+
+        &:active {
+          background-color: #2b5e92;
+        }
       }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .login-box {
+      width: 90%; // Přizpůsobení menším obrazovkám
+      padding: 20px;
+    }
+
+    input {
+      width: calc(100% - 40px); // Odsazení 20px z každé strany na menších obrazovkách
+    }
+
+    button {
+      padding: 10px 20px;
     }
   }
 </style>
