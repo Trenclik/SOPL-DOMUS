@@ -29,14 +29,62 @@
   }
 </script>
 
-<h1>Zapomenuté heslo</h1>
-<p>Pro resetování hesla zadejte svůj email.</p>
+<div class="login-container">
+  <div class="login-box">
+    <h2>Zapomenuté heslo</h2>
+    <p>Pro resetování hesla zadejte svůj email.</p>
 
-<form on:submit|preventDefault={handleSubmit}>
-  <!-- Použití Input komponenty pro email -->
-  <Input label="Email" type="email" placeholder="Zadejte váš email" value={email} on:input={(e) => (email = e.target.value)} />
-  
-  {#if emailError}<p style="color: red;">{emailError}</p>{/if}
+    <form on:submit|preventDefault={handleSubmit}>
+      <!-- Použití Input komponenty pro email -->
+      <Input label="Email" type="email" placeholder="Zadejte váš email" value={email} on:input={(e) => (email = e.target.value)} />
+      
+      {#if emailError}<p class="error-message">{emailError}</p>{/if}
 
-  <Button label="Odeslat kód" type="submit" />
-</form>
+      <Button label="Odeslat kód" type="submit" />
+    </form>
+  </div>
+</div>
+
+<style lang="scss">
+  .login-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f5f5f5;
+
+    .login-box {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+
+      h2 {
+        margin-bottom: 20px;
+      }
+
+      .error-message {
+        color: red;
+        margin-bottom: 10px;
+      }
+
+      button {
+        background-color: #4A90E2;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+
+        &:hover {
+          background-color: #357ABD;
+        }
+      }
+    }
+  }
+</style>
