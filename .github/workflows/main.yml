@@ -1,0 +1,27 @@
+name: Mirror to GitLab
+
+on:
+  push:
+    branches:
+      - '*' # Trigger on updates to all branches
+  delete:
+    branches:
+      - '*' # Trigger on deletions of all branches
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Check out the source repository
+      - name: Checkout Source Repository
+        uses: actions/checkout@v4
+
+      # Step 2: Add GitLab as a remote
+      - name: Add GitLab Remote
+        run: git remote add gitlab https://brunclik:${{ secrets.GITLAB_TOKEN }}@gitlab.rtsoft.cz/co-hackaton-rtsoft-2024/co-hackaton-2024-project-5.git
+
+      # Step 3: Push changes to GitLab
+      - name: Push to GitLab
+        run: |
+          git push gitlab --mirror
