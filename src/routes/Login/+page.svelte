@@ -42,20 +42,6 @@
 		  margin-bottom: 10px;
 		}
   
-		.forgot-password {
-		  margin-top: 10px;
-		  font-size: 14px;
-  
-		  a {
-			color: #4A90E2;
-			text-decoration: none;
-  
-			&:hover {
-			  text-decoration: underline;
-			}
-		  }
-		}
-  
 		button {
 		  background-color: #4A90E2;
 		  color: #fff;
@@ -83,9 +69,6 @@
 	  <Input type="email" bind:value={email} placeholder="Email" />
 	  <Input type="password" bind:value={password} placeholder="Password" />
 	  <button on:click={handleSubmit}>Login</button>
-	  <div class="forgot-password">
-		<a href="/forgot-password">Zapomenuté heslo</a>
-	  </div>
 	</div>
   </div>
   
