@@ -1,10 +1,8 @@
 <script>
-    //import { user } from '$lib/server/db/schema';
-
   let username = $state('');
-  let email =  $state('');
-  let password =  $state('');
-  let confirmPassword =  $state('');
+  let email = $state('');
+  let password = $state('');
+  let confirmPassword = $state('');
   let errorMessage = $state('');
 
   const validateForm = () => {
@@ -14,7 +12,6 @@
       console.log(password);
       console.log(confirmPassword);
       return 'Všechna pole jsou povinná';
-      
     } else if (password !== confirmPassword) {
       return 'Hesla se neshodují';
     } else {
@@ -30,10 +27,15 @@
       console.log('Heslo:', password);
     }
   };
+
+  const goBack = () => {
+    window.history.back();
+  };
 </script>
 
 <div class="register-container">
   <div class="register-box">
+    <button class="back-arrow" onclick={goBack} aria-label="Go back">&larr;</button>
     <h2>Registrace</h2>
     {#if errorMessage}
       <div class="error-message">{errorMessage}</div>
@@ -48,12 +50,10 @@
 
 <style lang="scss">
   .register-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    display: grid;
+    place-items: center;
     height: 100vh;
-    background-color: #f5f5f5;
+    background-color: white;
 
     .register-box {
       background-color: #fff;
@@ -62,6 +62,26 @@
       box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
       width: 320px;
       text-align: center;
+      display: grid;
+      gap: 15px;
+      position: relative;
+
+      .back-arrow {
+        position: absolute;
+        top: 10px;
+        left: 10px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #4a90e2;
+        background: none;
+        border: none;
+        transition: color 0.3s, background-color 0.3s;
+
+        &:hover {
+          color: #fff;
+          background-color: #4a90e2;
+        }
+      }
 
       h2 {
         margin-bottom: 20px;
@@ -77,10 +97,12 @@
 
       input {
         padding: 12px;
-        margin: 10px 0;
+        margin: 10px auto;
         border: 1px solid #ccc;
         border-radius: 5px;
         font-size: 14px;
+        width: calc(100% - 40px); /* Odsazení 20px z každé strany */
+        max-width: 250px;
 
         &:focus {
           border-color: #4a90e2;
@@ -125,6 +147,19 @@
       }
     }
   }
+
+  @media (max-width: 480px) {
+    .register-box {
+      width: 90%; // Přizpůsobení menším obrazovkám
+      padding: 20px;
+    }
+
+    input {
+      width: calc(100% - 40px); // Odsazení 20px z každé strany na menších obrazovkách
+    }
+
+    button {
+      padding: 10px 20px;
+    }
+  }
 </style>
-
-
