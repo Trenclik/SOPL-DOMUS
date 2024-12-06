@@ -1,30 +1,40 @@
 <script>
-    let { type = 'text', value = '', placeholder = '' } = $$props;
-  
-    const handleInput = (event) => {
-      value = event.target.value;
-    };
-  </script>
-  
-  <style lang="scss">
-    .input-container {
-      margin-bottom: 15px;
-  
-      input {
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-        font-size: 16px;
-  
-        &:focus {
-          border-color: #4A90E2;
-          outline: none;
-        }
-      }
-    }
-  </style>
-  
-  <div class="input-container">
-    <input type={type} bind:value={value} placeholder={placeholder} on:input={handleInput} />
-  </div>
-  
+  let {
+    label = state(""),
+    type = "text",
+    placeholder = "",
+    value = "",
+    onChange = () => {},
+  } = $props();
+
+  // Funkce volaná při změně hodnoty
+  function handleInput(event) {
+    onChange(event.target.value);
+  }
+</script>
+
+<div class="input-container">
+  {#if label}
+    <label>{label}</label>
+  {/if}
+  <input {type} {placeholder} {value} oninput={handleInput} />
+</div>
+
+<style>
+  .input-container {
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+  }
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+  }
+  input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+</style>
