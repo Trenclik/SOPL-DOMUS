@@ -1,82 +1,130 @@
 <script>
-  import Input from '$lib/Components/Input.svelte';
-  import Button from '$lib/Components/Button.svelte';
+    //import { user } from '$lib/server/db/schema';
 
-  let username = '';
-  let email = '';
-  let password = '';
-  let confirmPassword = '';
+  let username = $state('');
+  let email =  $state('');
+  let password =  $state('');
+  let confirmPassword =  $state('');
+  let errorMessage = $state('');
 
-  let usernameError = '';
-  let emailError = '';
-  let passwordError = '';
-  let confirmPasswordError = '';
-
-  function validateForm() {
-    let isValid = true;
-
-    // Reset errors
-    usernameError = '';
-    emailError = '';
-    passwordError = '';
-    confirmPasswordError = '';
-
-    // Validate username (min 3 characters)
-    if (username.length < 3) {
-      usernameError = 'Uživatelské jméno musí mít alespoň 3 znaky.';
-      isValid = false;
+  const validateForm = () => {
+    if (username === '' || email === '' || password === '' || confirmPassword === '') {
+      console.log(username);
+      console.log(email);
+      console.log(password);
+      console.log(confirmPassword);
+      return 'Všechna pole jsou povinná';
+      
+    } else if (password !== confirmPassword) {
+      return 'Hesla se neshodují';
+    } else {
+      return '';
     }
+  };
 
-    // Validate email format
-    const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
-    if (!emailRegex.test(email)) {
-      emailError = 'Zadejte platný email.';
-      isValid = false;
-    }
-
-    // Validate password (min 8 characters, at least one uppercase letter, and a number)
-    const passwordRegex = /^(?=.*[A-Z])(?=.*\d)/;
-    if (password.length < 8) {
-      passwordError = 'Heslo musí mít alespoň 8 znaků.';
-      isValid = false;
-    } else if (!passwordRegex.test(password)) {
-      passwordError = 'Heslo musí obsahovat alespoň jedno velké písmeno a číslo.';
-      isValid = false;
-    }
-
-    // Validate password confirmation
-    if (password !== confirmPassword) {
-      confirmPasswordError = 'Hesla se neshodují.';
-      isValid = false;
-    }
-
-    return isValid;
-  }
-
-  function handleSubmit() {
-    if (validateForm()) {
+  const handleSubmit = () => {
+    errorMessage = validateForm();
+    if (errorMessage === '') {
       console.log('Uživatelské jméno:', username);
       console.log('Email:', email);
       console.log('Heslo:', password);
-      alert('Registrace proběhla úspěšně!');
     }
-  }
+  };
 </script>
 
-<h1>Registrace</h1>
-<form on:submit|preventDefault={handleSubmit}>
-  <!-- Použití Input komponenty pro každé pole -->
-  <Input label="Uživatelské jméno" type="text" placeholder="Zadejte uživatelské jméno" value={username} on:input={(e) => (username = e.target.value)} />
-  {#if usernameError}<p style="color: red;">{usernameError}</p>{/if}
+<div class="register-container">
+  <div class="register-box">
+    <h2>Registrace</h2>
+    {#if errorMessage}
+      <div class="error-message">{errorMessage}</div>
+    {/if}
+    <input type="text" bind:value={username} placeholder="Uživatelské jméno" />
+    <input type="email" bind:value={email} placeholder="Email" />
+    <input type="password" bind:value={password} placeholder="Heslo" />
+    <input type="password" bind:value={confirmPassword} placeholder="Potvrďte heslo" />
+    <button onclick={handleSubmit}>Registrovat</button>
+  </div>
+</div>
 
-  <Input label="Email" type="email" placeholder="Zadejte email" value={email} on:input={(e) => (email = e.target.value)} />
-  {#if emailError}<p style="color: red;">{emailError}</p>{/if}
+<style lang="scss">
+  .register-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f5f5f5;
 
-  <Input label="Heslo" type="password" placeholder="Zadejte heslo" value={password} on:input={(e) => (password = e.target.value)} />
-  {#if passwordError}<p style="color: red;">{passwordError}</p>{/if}
+    .register-box {
+      background-color: #fff;
+      padding: 25px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      width: 320px;
+      text-align: center;
 
-  <Input label="Potvrďte heslo" type="password" placeholder="Potvrďte nové heslo" value={confirmPassword} on:input={(e) => (confirmPassword = e.target.value)} />
-  {#if confirmPasswordError}<p style="color: red;">{confirmPasswordError}</p>{/if}
+      h2 {
+        margin-bottom: 20px;
+        font-size: 22px;
+        color: #333;
+      }
 
-  <Button label="Registrovat" type="submit" />
-</form>
+      .error-message {
+        color: #d9534f;
+        font-size: 14px;
+        margin-bottom: 15px;
+      }
+
+      input {
+        padding: 12px;
+        margin: 10px 0;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+
+        &:focus {
+          border-color: #4a90e2;
+          outline: none;
+          box-shadow: 0 0 4px rgba(74, 144, 226, 0.3);
+        }
+      }
+
+      .register-info {
+        font-size: 14px;
+        margin-top: 10px;
+        color: #666;
+
+        a {
+          color: #4a90e2;
+          text-decoration: none;
+
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
+
+      button {
+        background-color: #4a90e2;
+        color: #fff;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+
+        &:hover {
+          background-color: #357abd;
+        }
+
+        &:active {
+          background-color: #2b5e92;
+        }
+      }
+    }
+  }
+</style>
+
+

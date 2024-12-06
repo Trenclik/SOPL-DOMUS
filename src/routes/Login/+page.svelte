@@ -16,6 +16,21 @@
 	};
   </script>
   
+  <div class="login-container">
+	<div class="login-box">
+	  <h2>Login</h2>
+	  {#if errorMessage}
+		<div class="error-message">{errorMessage}</div>
+	  {/if}
+	  <Input type="email" bind:value={email} placeholder="Email" />
+	  <Input type="password" bind:value={password} placeholder="Password" />
+	  <button on:click={handleSubmit}>Login</button>
+	  <div class="forgot-password">
+		<a href="/forgot-password">Zapomenuté heslo</a>
+	  </div>
+	</div>
+  </div>
+  
   <style lang="scss">
 	.login-container {
 	  display: flex;
@@ -73,19 +88,3 @@
 	  }
 	}
   </style>
-  
-  <div class="login-container">
-	<div class="login-box">
-	  <h2>Login</h2>
-	  {#if errorMessage}
-		<div class="error-message">{errorMessage}</div>
-	  {/if}
-	  <Input type="email" bind:value={email} placeholder="Email" />
-	  <Input type="password" bind:value={password} placeholder="Password" />
-	  <button on:click={handleSubmit}>Login</button>
-	  <div class="forgot-password">
-		<a href="/forgot-password">Zapomenuté heslo</a>
-	  </div>
-	</div>
-  </div>
-  
