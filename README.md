@@ -1,7 +1,7 @@
 # SOPL-DOMUS
 [Uvítání](https://www.figma.com/design/Ch8O1vHVcaPG7PlLWEbruL/Untitled?node-id=0-1&t=HsFbcUHUZHMYAu9Y-1)
 [Login](https://www.figma.com/design/YKfN7eYPO669nwMn0eKMJ2/Untitled?node-id=0-1&t=KGsIUQMAuFAWKCEj-1) použíjte pozadí pro login, registr a zapomenuté heslo nebo jméno či email
-[Main stránka](https://www.figma.com/design/ZZuYEM1dJwzZnYvvrAEiXT/Untitled?node-id=0-1&t=RsEFISxyL4RMFvu7-1)
+[Main stránka & profil & Deník & Tipy+triky](https://www.figma.com/design/ZZuYEM1dJwzZnYvvrAEiXT/Untitled?node-id=0-1&t=RsEFISxyL4RMFvu7-1)
 [Účet view](https://www.figma.com/design/NUplsIkCmyeXKRyiRIaeH5/Untitled?node-id=0-1&t=Kl4JYNEYAR8JGcog-1)
 [Univerzální pozadí po rozkliku](https://www.figma.com/design/qtgZVj9FQIN7jpBm8aepRH/Untitled?node-id=1-7&t=328IgHvQYmDzzVOb-1)
 [Header & vyhledávání & Footer](https://www.figma.com/design/LjbsWudTL74Osfk3rEh38q/Untitled?node-id=1-7&node-type=canvas&t=k9nFH0GKKUTAqRIv-0)
