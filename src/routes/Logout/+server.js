@@ -1,38 +1,44 @@
 import { serialize } from 'cookie';
 import { db } from '$lib/server/db';
-import { usersTable } from '$lib/server/db/schema';
+import { usersTable } from '$lib/server/db/schema.js';
 import { eq } from 'drizzle-orm';
 
-export async function POST(event) {
-  try {
-    const { locals } = event;
+export async function POST({ request }) {
+	try {
+		// Extract session cookie
+		const sessionCookie = request.headers.get('cookie')?.split(';').find(cookie => cookie.trim().startsWith('session='));
 
-    // Check if the user is logged in (i.e., if locals.user exists)
-    if (locals.user) {
-      // Update the user's status to offline (isOnline = 0)
-      await db.update(usersTable)
-        .set({ isOnline: 0 })
-        .where(eq(usersTable.id, locals.user.id))
-        .run();
-    }
+		if (!sessionCookie) {
+			return new Response(JSON.stringify({ success: false, message: 'Not authenticated' }), { status: 401 });
+		}
 
-    // Set the cookie to expire immediately
-    const cookie = serialize('session', '', {
-      httpOnly: true,
-      maxAge: -1, // Expires immediately
-      sameSite: 'strict',
-      secure: true,
-    });
+		const userId = sessionCookie.split('=')[1];
 
-    // Return a response with the Set-Cookie header
-    return new Response('Logout successful', {
-      status: 200,
-      headers: {
-        'Set-Cookie': cookie,
-      },
-    });
-  } catch (error) {
-    console.error('Error during logout:', error);
-    return new Response('Internal Server Error', { status: 500 });
-  }
+		// Fetch user to ensure validity
+		const user = await db.select().from(usersTable).where(eq(usersTable.id, userId)).get();
+
+		if (!user) {
+			return new Response(JSON.stringify({ success: false, message: 'User not found' }), { status: 404 });
+		}
+
+		// Update the `isOnline` field
+		await db.update(usersTable).set({ isOnline: 0 }).where(eq(usersTable.id, user.id)).run();
+
+		// Expire the session cookie
+		const expiredCookie = serialize('session', '', {
+			httpOnly: true,
+			secure: true,
+			sameSite: 'strict',
+			path: '/',
+			maxAge: -1, // Expire immediately
+		});
+
+		return new Response(JSON.stringify({ success: true, message: 'Logout successful' }), {
+			status: 200,
+			headers: { 'Set-Cookie': expiredCookie },
+		});
+	} catch (error) {
+		console.error('Error during logout:', error);
+		return new Response(JSON.stringify({ success: false, message: 'Internal Server Error' }), { status: 500 });
+	}
 }

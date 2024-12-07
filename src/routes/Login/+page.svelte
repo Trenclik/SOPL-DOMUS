@@ -2,16 +2,16 @@
 	import { onMount } from 'svelte';
 
 	let email = '';
-	let password = '';
-	let nickname = '';
-	let rememberMe = false;
-	let notification = '';
-	let loginSuccess = false;
-	let errorMessage = '';
-	let user = null;
+	let password = $state('');
+	let nickname = $state('');
+	let rememberMe = $state(false);
+	let notification = $state('');
+	let loginSuccess = $state(false);
+	let errorMessage = $state('');
+	let user = $state(null);
 	let loading = true;
 
-	onMount(async () => {
+	$effect(async () => {
       try {
         const response = await fetch('/Profile', { method: 'GET' });
   
