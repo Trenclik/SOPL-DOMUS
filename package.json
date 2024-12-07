@@ -20,6 +20,13 @@
 	},
 	"dependencies": {
 		"@libsql/client": "^0.9.0",
+<<<<<<< Updated upstream
+=======
+		"@sveltejs/adapter-vercel": "^5.5.0",
+		"bcrypt": "^5.1.1",
+		"cookie": "^1.0.2",
+		"dotenv": "^16.4.7",
+>>>>>>> Stashed changes
 		"drizzle-orm": "^0.33.0"
 	}
 }
