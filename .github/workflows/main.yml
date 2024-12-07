@@ -20,17 +20,21 @@ jobs:
           fetch-depth: 0 # Fetch full history
           fetch-tags: true # Fetch all tags
 
-      # Step 2: Fetch all branches
+      # Step 2: Switch to a detached HEAD
+      - name: Switch to Detached HEAD
+        run: git checkout --detach
+
+      # Step 3: Fetch all branches
       - name: Fetch All Branches
         run: |
           git config remote.origin.fetch "+refs/heads/*:refs/heads/*"
           git fetch --all
 
-      # Step 3: Add GitLab as a remote
+      # Step 4: Add GitLab as a remote
       - name: Add GitLab Remote
         run: git remote add gitlab https://brunclik:${{ secrets.GITLAB_TOKEN }}@gitlab.rtsoft.cz/co-hackaton-rtsoft-2024/co-hackaton-2024-project-5.git
 
-      # Step 4: Push all branches and tags to GitLab
+      # Step 5: Push all branches and tags to GitLab
       - name: Push to GitLab
         run: |
           git push gitlab --all # Push all branches
