@@ -1,75 +1,75 @@
 <script>
 	import { onMount } from 'svelte';
 
-	let email = '';
-	let password = '';
-	let nickname = '';
-	let rememberMe = false;
-	let notification = '';
-	let loginSuccess = false;
-	let errorMessage = '';
-	let user = null;
-	let loading = true;
+	let email = $state('');
+	let password = $state('');
+	let nickname = $state('');
+	let rememberMe = $state(false);
+	let notification = $state('');
+	let loginSuccess = $state(false);
+	let errorMessage = $state('');
+	let user = $state(null);
+	let loading = $state(true);
 
 	onMount(async () => {
-      try {
-        const response = await fetch('/Profile', { method: 'GET' });
-  
-        if (response.ok) {
-          user = await response.json();
-        }
-      } catch (error) {
-        errorMessage = 'Error fetching profile data.';
-      } finally {
-        loading = false;
-      }
-    });
+		try {
+			const response = await fetch('/Profile', { method: 'GET' });
+
+			if (response.ok) {
+				user = await response.json();
+			}
+		} catch (error) {
+			errorMessage = 'Error fetching profile data.';
+		} finally {
+			loading = false;
+		}
+	});
 
 	const handleSubmit = async (event) => {
-	  event.preventDefault();
-	  notification = '';
-	  errorMessage = '';
-  
-	  // Handle the login logic
-	  if (!nickname || !password) {
-		errorMessage = 'Incorrect Nickname or Password';
-	  } else {
-		const formData = new FormData();
-		formData.append('nickname', nickname);
-		formData.append('password', password);
-		formData.append('rememberMe', rememberMe ? 'true' : 'false');
-  
-		const response = await fetch('/Login', {
-		  method: 'POST',
-		  body: formData,
-		});
-  
-		if (response.ok) {
-		  const result = await response.json();
-		  if (result.success) {
-			loginSuccess = true;
-			setTimeout(() => {
-			  window.location.href = '/Profile';
-			}, 1000);
-		  } else if (result.message === 'Please verify your email before logging in.') {
-			notification = 'The email has not been verified yet. Please verify it before logging in.';
-		  } else {
-			notification = result.message;
-		  }
+		event.preventDefault();
+		notification = '';
+		errorMessage = '';
+
+		if (!nickname || !password) {
+			errorMessage = 'Incorrect Nickname or Password';
 		} else {
-		  const errorResult = await response.json();
-		  notification = errorResult.message;
+			const formData = new FormData();
+			formData.append('nickname', nickname);
+			formData.append('password', password);
+			formData.append('rememberMe', rememberMe ? 'true' : 'false');
+
+			const response = await fetch('/Login', {
+				method: 'POST',
+				body: formData,
+			});
+
+			if (response.ok) {
+				const result = await response.json();
+				if (result.success) {
+					loginSuccess = true;
+					setTimeout(() => {
+						window.location.href = '/Profile';
+					}, 1000);
+				} else if (result.message === 'Please verify your email before logging in.') {
+					notification = 'The email has not been verified yet. Please verify it before logging in.';
+				} else {
+					notification = result.message;
+				}
+			} else {
+				const errorResult = await response.json();
+				notification = errorResult.message;
+			}
 		}
-	  }
 	};
-  
+
 	const goBack = () => {
-	  window.history.back();
+		window.history.back();
 	};
+
 	const logout = async () => {
-      await fetch('/Logout', { method: 'POST' });
-      window.location.href = '/Login';
-    };
+		await fetch('/Logout', { method: 'POST' });
+		window.location.href = '/Login';
+	};
 </script>
 
 <div class="login-container">
@@ -93,7 +93,7 @@
 					Login successful! Redirecting to your profile...
 				</div>
 			{/if}
-			<form onsubmit={handleSubmit} class="login-form">
+			<form onsubmit={handleSubmit}>
 				<input type="text" bind:value={nickname} placeholder="Nickname" required />
 				<input type="password" bind:value={password} placeholder="Password" required />
 				<button type="submit">Login</button>
@@ -102,19 +102,20 @@
 				<a href="/ForgotPass">Forgot password?</a>
 			</div>
 			<div class="form-buttons">
-				<button onclick={goBack}>Home</button>
-				<button href="/register">Register</button>
+				<a href="/"><button>Home</button></a>
+				<a href="/Register"><button>Register</button></a>
 			</div>
 		</div>
 	{/if}
 </div>
 
-<style>
+<style lang="scss">
 	.login-container {
 		display: grid;
 		place-items: center;
 		height: 100vh;
-		background-color: white;
+		background: url('background-image.jpg') no-repeat center center;
+		background-size: cover;
 		font-family: 'Arial', sans-serif;
 		box-sizing: border-box;
 		padding: 1rem;
@@ -123,7 +124,7 @@
 	.login-box {
 		display: grid;
 		gap: 15px;
-		background-color: #fff;
+		background-color: rgba(255, 255, 255, 0.9); /* Lehce průhledné pozadí */
 		padding: 25px;
 		border-radius: 8px;
 		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -136,27 +137,26 @@
 	}
 
 	.back-arrow {
-	position: absolute;
-	top: 10px;
-	left: 10px;
-	width: 32px; /* Ensure the arrow is not stretched */
-	height: 32px; /* Maintain square shape for clarity */
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	font-size: 20px; /* Adjust font size for better visibility */
-	cursor: pointer;
-	color: #4a90e2;
-	background: none;
-	border: none;
-	transition: color 0.3s, background-color 0.3s;
-}
+		position: absolute;
+		top: 10px;
+		left: 10px;
+		width: 32px;
+		height: 32px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		font-size: 20px;
+		cursor: pointer;
+		color: #4a90e2;
+		background: none;
+		border: none;
+		transition: color 0.3s, background-color 0.3s;
+	}
 
-.back-arrow:hover {
-	color: #fff;
-	background-color: #4a90e2; /* Highlight on hover */
-}
-
+	.back-arrow:hover {
+		color: #fff;
+		background-color: #4a90e2;
+	}
 
 	h2 {
 		margin-bottom: 20px;
@@ -243,4 +243,3 @@
 		}
 	}
 </style>
-l

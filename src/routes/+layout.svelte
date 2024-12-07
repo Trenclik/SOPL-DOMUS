@@ -37,7 +37,7 @@
         <a href="/Profile">Profile</a>
   
         {#if user}
-        <img src={user.profileImage} alt="" class="profile-pic" />
+        <a href="/Profile" class="profile-pic"><img src={user.profileImage} alt="" class="profile-pic" style="margin: 0%;"/></a>
         {/if}
     </header>
     <main>
@@ -58,7 +58,7 @@
     }
   
     .profile-pic {
-      height: 80%;
+      height: 8vh;
       margin-right: 1vh;
       border-radius: 50%;
       object-fit: cover;
