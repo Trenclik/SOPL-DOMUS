@@ -1,5 +1,7 @@
 <script>
     import { onMount } from 'svelte';
+    import Header from '$lib/Components/Header.svelte';
+    import Footer from '$lib/Components/Footer.svelte';
   
     let user = null;
     let loading = true;
@@ -27,40 +29,15 @@
     };
 </script>
   
-    <header>
-        <a href="/">Home</a>
-        <a href="/Login">Login</a>
-        <a href="/Register">Register</a>
-        <a href="/2FA">2FA</a>
-        <a href="/NewPass">New Pass</a>
-        <a href="/ForgotPass">Forgot Password</a>
-        <a href="/Profile">Profile</a>
-  
-        {#if user}
-        <a href="/Profile" class="profile-pic"><img src={user.profileImage} alt="" class="profile-pic" style="margin: 0%;"/></a>
-        {/if}
-    </header>
+<Header/>
+
     <main>
         <!-- Render inner content (children) passed to this layout -->
         <slot />
     </main>
 
-
+<Footer/>
   
   <style>
-    header {
-      display: flex;
-      margin: 0%;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #f1f1f1;
-      height: 10vh;
-    }
-  
-    .profile-pic {
-      height: 8vh;
-      margin-right: 1vh;
-      border-radius: 50%;
-      object-fit: cover;
-    }
+
   </style>  
