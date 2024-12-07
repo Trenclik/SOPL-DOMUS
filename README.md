@@ -5,9 +5,11 @@
 [Účet view](https://www.figma.com/design/NUplsIkCmyeXKRyiRIaeH5/Untitled?node-id=0-1&t=Kl4JYNEYAR8JGcog-1)
 [Univerzální pozadí po rozkliku](https://www.figma.com/design/qtgZVj9FQIN7jpBm8aepRH/Untitled?node-id=1-7&t=328IgHvQYmDzzVOb-1)
 [Header & vyhledávání & Footer](https://www.figma.com/design/LjbsWudTL74Osfk3rEh38q/Untitled?node-id=1-7&node-type=canvas&t=k9nFH0GKKUTAqRIv-0)
+[Téma browser](https://www.figma.com/design/6cvK7hzmQteis3YuVrCTef/Untitled?node-id=1-23&node-type=canvas&t=unf8Tf4Dgk5Wu7dh-0)
+[V tématu](https://www.figma.com/design/DmvO0qNH3K5HeD1KnRbA2r/Untitled?node-id=0-1&node-type=canvas&t=3Ogt8AC5AuMgWLcJ-0)
 [Nastavení]()
 [Části nastavení]()
 [Chatbot]()
 [Tutoriál]()
 [Komnetáře]()
-[Téma page]()
+
