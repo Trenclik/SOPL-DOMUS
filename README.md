@@ -13,4 +13,4 @@
 [Tutoriál]()
 [Notifikace](https://www.figma.com/design/cEpcV15nFjSTXXUENXXf1Z/Untitled?node-id=0-1&node-type=canvas&t=lz1YdP9hYS9HXyiL-0)
 [Nastavení](https://www.figma.com/design/9gWgxUbos3sbEEcmykcPfp/Untitled?node-id=0-1&t=GjLZqBhfCmPGwTsm-1)
-
+[Vyhledávání](https://www.figma.com/design/iarlAFtSZDbJm2rsXoNVAx/Untitled?node-id=0-1&t=8P0SsmOybEQbS4Tr-1)
