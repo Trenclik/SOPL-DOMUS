@@ -54,11 +54,12 @@
       justify-content: space-between;
       align-items: center;
       background-color: #f1f1f1;
+      height: 10vh;
     }
   
     .profile-pic {
-      width: 40px;
-      height: 40px;
+      height: 80%;
+      margin-right: 1vh;
       border-radius: 50%;
       object-fit: cover;
     }

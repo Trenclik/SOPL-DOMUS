@@ -14,5 +14,5 @@ export const usersTable = sqliteTable('users', {
     userLevel: integer('user_level').default(1).notNull(),
     createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`).notNull(),
     updatedAt: text('updated_at').default(sql`CURRENT_TIMESTAMP`).notNull(),
-    profileImage: text('profile_image').default("https://preview.redd.it/new-lore-ekko-or-old-lore-ekko-v0-rk1pnlymql5c1.jpg?width=300&format=pjpg&auto=webp&s=769e3a4b5537853cea944cfb4ccf350320975d18"),
+    profileImage: text('profile_image').default("https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"),
   });
