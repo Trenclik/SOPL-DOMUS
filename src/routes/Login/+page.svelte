@@ -78,7 +78,6 @@
 			<p>Already logged in</p>
 			<button onclick={logout}>Logout</button>
 		</div>
-
 	{:else}
 		<div class="login-box">
 			<button class="back-arrow" onclick={goBack} aria-label="Go back">&larr;</button>
@@ -90,11 +89,11 @@
 				<div class="notification">{notification}</div>
 			{/if}
 			{#if loginSuccess}
-				<div class="notification" style="color: green">
+				<div class="notification success">
 					Login successful! Redirecting to your profile...
 				</div>
 			{/if}
-			<form onsubmit={handleSubmit}>
+			<form onsubmit={handleSubmit} class="login-form">
 				<input type="text" bind:value={nickname} placeholder="Nickname" required />
 				<input type="password" bind:value={password} placeholder="Password" required />
 				<button type="submit">Login</button>
@@ -108,137 +107,140 @@
 			</div>
 		</div>
 	{/if}
-	
 </div>
 
 <style>
 	.login-container {
-	  display: grid;
-	  place-items: center;
-	  height: 100vh;
-	  background-color: white;
-	  font-family: 'Arial', sans-serif;
+		display: grid;
+		place-items: center;
+		height: 100vh;
+		background-color: white;
+		font-family: 'Arial', sans-serif;
+		box-sizing: border-box;
+		padding: 1rem;
 	}
-  
+
 	.login-box {
-	  background-color: #fff;
-	  padding: 25px;
-	  border-radius: 8px;
-	  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-	  width: 320px;
-	  text-align: center;
-	  display: grid;
-	  gap: 15px;
-	  position: relative;
+		display: grid;
+		gap: 15px;
+		background-color: #fff;
+		padding: 25px;
+		border-radius: 8px;
+		box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+		width: 100%;
+		max-width: 400px;
+		min-width: 280px;
+		position: relative;
+		text-align: center;
+		box-sizing: border-box;
 	}
-  
+
 	.back-arrow {
-	  position: absolute;
-	  top: 10px;
-	  left: 10px;
-	  font-size: 24px;
-	  cursor: pointer;
-	  color: #4a90e2;
-	  background: none;
-	  border: none;
-	  transition: color 0.3s, background-color 0.3s;
-	}
-  
-	.back-arrow:hover {
-	  color: #fff;
-	  background-color: #4a90e2;
-	}
-  
+	position: absolute;
+	top: 10px;
+	left: 10px;
+	width: 32px; /* Ensure the arrow is not stretched */
+	height: 32px; /* Maintain square shape for clarity */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 20px; /* Adjust font size for better visibility */
+	cursor: pointer;
+	color: #4a90e2;
+	background: none;
+	border: none;
+	transition: color 0.3s, background-color 0.3s;
+}
+
+.back-arrow:hover {
+	color: #fff;
+	background-color: #4a90e2; /* Highlight on hover */
+}
+
+
 	h2 {
-	  margin-bottom: 20px;
-	  font-size: 22px;
-	  color: #333;
+		margin-bottom: 20px;
+		font-size: 1.5rem;
+		color: #333;
 	}
-  
-	.error-message, .notification {
-	  font-size: 14px;
-	  margin-bottom: 15px;
-	  color: #d9534f;
-	}
-  
+
+	.error-message,
 	.notification {
-	  color: #28a745;
+		font-size: 0.875rem;
+		padding: 0.5rem;
+		border-radius: 4px;
 	}
-  
+
+	.error-message {
+		background-color: #f8d7da;
+		color: #721c24;
+	}
+
+	.notification {
+		background-color: #d4edda;
+		color: #155724;
+	}
+
 	input {
-	  padding: 12px;
-	  margin: 10px auto;
-	  border: 1px solid #ccc;
-	  border-radius: 5px;
-	  font-size: 14px;
-	  width: calc(100% - 40px);
-	  max-width: 250px;
-	}
-  
-	input:focus {
-	  border-color: #4a90e2;
-	  outline: none;
-	  box-shadow: 0 0 4px rgba(74, 144, 226, 0.3);
-	  background-color: #ffffff;
-	}
-  
-	.forgot-password {
-	  margin-top: 10px;
-	  font-size: 14px;
-	  color: #666;
-	}
-  
-	.forgot-password a {
-	  color: #4a90e2;
-	  text-decoration: none;
-	}
-  
-	.forgot-password a:hover {
-	  text-decoration: underline;
-	}
-  
-	button {
-	  background-color: #4a90e2;
-	  color: #fff;
-	  border: none;
-	  padding: 12px 20px;
-	  border-radius: 5px;
-	  cursor: pointer;
-	  font-size: 16px;
-	  margin-top: 20px;
-	  transition: background-color 0.3s;
-	}
-  
-	button:hover {
-	  background-color: #357abd;
-	}
-  
-	button:active {
-	  background-color: #2b5e92;
-	}
-  
-	.form-buttons {
-	  display: flex;
-	  gap: 10px;
-	  justify-content: center;
-	}
-  
-	.form-buttons button {
-	  background-color: grey;
-	}
-  
-	@media (max-width: 480px) {
-	  .login-box {
-		width: 90%;
-		padding: 20px;
-	  }
-  
-	  input {
+		padding: 12px;
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		font-size: 14px;
 		width: calc(100% - 40px);
-	  }
-  
-	  button {
-		padding: 10px 20px;
-	  }
+		max-width: 250px;
+		box-sizing: border-box;
+		margin: 10px auto;
+	}
+
+	button {
+		background-color: #4a90e2;
+		color: white;
+		border: none;
+		padding: 12px 20px;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 16px;
+		margin-top: 10px;
+		transition: background-color 0.3s;
+		box-sizing: border-box;
+		width: 100%;
+	}
+
+	button:hover {
+		background-color: #357abd;
+	}
+
+	.forgot-password {
+		margin-top: 10px;
+		font-size: 14px;
+		color: #666;
+	}
+
+	.forgot-password a {
+		color: #4a90e2;
+		text-decoration: none;
+	}
+
+	.form-buttons {
+		display: flex;
+		gap: 10px;
+		justify-content: center;
+	}
+
+	@media (max-width: 480px) {
+		.login-box {
+			width: 90%;
+			padding: 20px;
+		}
+
+		input {
+			width: calc(100% - 40px);
+		}
+
+		button {
+			padding: 10px;
+			font-size: 0.9rem;
+		}
 	}
 </style>
+l

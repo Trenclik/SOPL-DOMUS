@@ -148,15 +148,20 @@
 			position: relative;
 
 			.back-arrow {
-				position: absolute;
-				top: 10px;
-				left: 10px;
-				font-size: 24px;
-				cursor: pointer;
-				color: #4a90e2;
-				background: none;
-				border: none;
-				transition: color 0.3s, background-color 0.3s;
+        		position: absolute;
+        		top: 10px;
+        		left: 10px;
+        		width: 32px; /* Ensure uniform size */
+        		height: 32px; /* Maintain square dimensions */
+        		display: flex;
+        		justify-content: center;
+        		align-items: center;
+        		font-size: 20px; /* Adjust font size for better visibility */
+        		cursor: pointer;
+        		color: #4a90e2;
+        		background: none;
+        		border: none;
+        		transition: color 0.3s, background-color 0.3s;
 
 				&:hover {
 					color: #fff;
