@@ -1,15 +1,15 @@
 <script>
 	import { onMount } from 'svelte';
 
-	let email = $state('');
-	let password = $state('');
-	let nickname = $state('');
-	let rememberMe = $state(false);
-	let notification = $state('');
-	let loginSuccess = $state(false);
-	let errorMessage = $state('');
-	let user = $state(null);
-	let loading = $state(true);
+	let email = '';
+	let password = '';
+	let nickname = '';
+	let rememberMe = false;
+	let notification = '';
+	let loginSuccess = false;
+	let errorMessage = '';
+	let user = null;
+	let loading = true;
 
 	onMount(async () => {
 		try {
@@ -110,15 +110,21 @@
 </div>
 
 <style lang="scss">
+
+
 	.login-container {
 		display: grid;
 		place-items: center;
 		height: 100vh;
-		background: url('background-image.jpg') no-repeat center center;
-		background-size: cover;
+		background-image: url('/src//static//BackGround.svg'); /* Nahraďte cestou k vašemu SVG */
+		margin: 0;
+		background-size:cover;
+		background-position: center;
+		background-repeat: no-repeat;
 		font-family: 'Arial', sans-serif;
 		box-sizing: border-box;
-		padding: 1rem;
+		padding: 0;
+		margin: 0;
 	}
 
 	.login-box {
@@ -192,19 +198,7 @@
 		margin: 10px auto;
 	}
 
-	button {
-		background-color: #4a90e2;
-		color: white;
-		border: none;
-		padding: 12px 20px;
-		border-radius: 5px;
-		cursor: pointer;
-		font-size: 16px;
-		margin-top: 10px;
-		transition: background-color 0.3s;
-		box-sizing: border-box;
-		width: 100%;
-	}
+
 
 	button:hover {
 		background-color: #357abd;
@@ -222,9 +216,48 @@
 	}
 
 	.form-buttons {
-		display: flex;
-		gap: 10px;
-		justify-content: center;
+    display: flex;
+    justify-content: space-between; /* Rovnoměrné rozložení tlačítek */
+    align-items: center;
+    margin-top: 20px;
+	gap: 15px;
+
+
+    a {
+        flex: 1; /* Tlačítka Home a Register se roztáhnou rovnoměrně */
+        text-decoration: none;
+    }
+
+    button {
+        width: 100%; /* Tlačítka vyplní prostor rodičovského elementu */
+        margin: 0 ; /* Přidání mezery mezi tlačítky */
+        padding: 12px;
+        font-size: 16px;
+        background-color: #be4cd8;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    button:hover {
+        background-color: #357abd;
+    }
+}
+
+	button {
+		background-color: #be4cd8;
+		color: white;
+		border: none;
+		padding: 12px 20px;
+		border-radius: 5px;
+		cursor: pointer;
+		font-size: 16px;
+		margin-top: 10px;
+		transition: background-color 0.3s;
+		box-sizing: border-box;
+		width: 100%;
 	}
 
 	@media (max-width: 480px) {
