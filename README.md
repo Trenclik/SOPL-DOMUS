@@ -11,5 +11,5 @@
 [Části nastavení]()
 [Chatbot]()
 [Tutoriál]()
-[Komnetáře]()
+[Komnetáře](https://www.figma.com/design/cEpcV15nFjSTXXUENXXf1Z/Untitled?node-id=0-1&node-type=canvas&t=lz1YdP9hYS9HXyiL-0)
 
