@@ -97,10 +97,6 @@
 			<form onsubmit={handleSubmit}>
 				<input type="text" bind:value={nickname} placeholder="Nickname" required />
 				<input type="password" bind:value={password} placeholder="Password" required />
-				<div class="checkbox">
-					<input type="checkbox" bind:checked={rememberMe} />
-					<span>Remember me</span>
-				</div>
 				<button type="submit">Login</button>
 			</form>
 			<div class="forgot-password">
@@ -184,21 +180,6 @@
 	  outline: none;
 	  box-shadow: 0 0 4px rgba(74, 144, 226, 0.3);
 	  background-color: #ffffff;
-	}
-  
-	.checkbox {
-	  display: flex;
-	  align-items: center;
-	  margin-bottom: 20px;
-	  width: 100%;
-	  gap: 8px;
-	  margin: 0;
-	}
-  
-	.checkbox input[type="checkbox"] {
-	  width: 15px;
-	  height: 15px;
-	  cursor: pointer;
 	}
   
 	.forgot-password {
