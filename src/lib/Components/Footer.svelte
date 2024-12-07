@@ -3,7 +3,6 @@
     <img class="lupa" src="./magnifying-glass.svg" alt="">
     <img class="bublina" src="./speechbubble.svg" alt="">
     <img class="bublina-clovek" src="./buble-person.svg" alt="">
-    <img class="profil" src="./profile_icon.svg" alt="">
 </div>
 
 <style lang="scss">
