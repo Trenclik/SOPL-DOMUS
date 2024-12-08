@@ -75,7 +75,7 @@
 				if (result.success) {
 					registrationSuccess = true;
 					setTimeout(() => {
-						goto('/login'); // Redirect to login after success
+						goto('/Login'); // Redirect to login after success
 					}, 1000);
 				} else {
 					notification = result.message;
@@ -90,10 +90,7 @@
 		}
 	}
 
-	// Go back to the previous page
-	function goBack() {
-		window.history.back();
-	}
+
 	const logout = async () => {
       await fetch('/Logout', { method: 'POST' });
       window.location.href = '/Login';
@@ -101,6 +98,8 @@
 </script>
 
 <div class="register-container">
+	<img src="./logo.png" alt="Logo" />
+
 	{#if user}
 	<div class="register-box">
 		<p>Already logged in</p>
@@ -108,15 +107,14 @@
 	</div>
 	{:else}
 		<div class="register-box">
-			<button class="back-arrow" onclick={goBack} aria-label="Go back">&larr;</button>
 			<h2>Register</h2>
 			{#if notification}
 				<div class="error-message" transition:fade>{notification}</div>
 			{/if}
-			<input type="text" bind:value={username} placeholder="Username" />
-			<input type="email" bind:value={email} placeholder="Email" />
-			<input type="password" bind:value={password} placeholder="Password" />
-			<input type="password" bind:value={confirmPassword} placeholder="Confirm Password" />
+			<input type="text" bindvalue={username} placeholder="Username" />
+			<input type="email" bindvalue={email} placeholder="Email" />
+			<input type="password" bindvalue={password} placeholder="Password" />
+			<input type="password" bindvalue={confirmPassword} placeholder="Confirm Password" />
 			<button onclick={register}>Register</button>
 		</div>
 	{/if}
@@ -130,97 +128,117 @@
 </div>
 
 <style lang="scss">
-	.register-container {
-		display: grid;
-		place-items: center;
-		height: 100vh;
-		background-color: white;
+.register-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  height: 100vh;
+  background-image: url('/src//static//BackGround.svg');
+  padding-bottom: 70px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  font-family: 'Arial', sans-serif;
+  box-sizing: border-box;
 
-		.register-box {
-			background-color: #fff;
-			padding: 25px;
-			border-radius: 8px;
-			box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-			width: 320px;
-			text-align: center;
-			display: grid;
-			gap: 15px;
-			position: relative;
+  img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+    z-index: 1;
+  }
 
-			.back-arrow {
-				position: absolute;
-				top: 10px;
-				left: 10px;
-				font-size: 24px;
-				cursor: pointer;
-				color: #4a90e2;
-				background: none;
-				border: none;
-				transition: color 0.3s, background-color 0.3s;
+  .register-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    min-width: 280px;
+    position: relative;
+    text-align: center;
+    box-sizing: border-box;
 
-				&:hover {
-					color: #fff;
-					background-color: #4a90e2;
-				}
-			}
+    h2 {
+      margin-bottom: 20px;
+      font-size: 1.5rem;
+      color: #333;
+    }
 
-			h2 {
-				margin-bottom: 20px;
-				font-size: 22px;
-				color: #333;
-			}
+    .error-message,
+    .success-message {
+      font-size: 0.875rem;
+      padding: 0.5rem;
+      border-radius: 4px;
+      margin-bottom: 15px;
 
-			.error-message, .success-message {
-				font-size: 14px;
-				margin-bottom: 15px;
-				color: #d9534f;
+      &.error-message {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
 
-				&.success-message {
-					color: #5cb85c;
-				}
-			}
+      &.success-message {
+        background-color: #d4edda;
+        color: #155724;
+      }
+    }
 
-			input {
-				padding: 12px;
-				margin: 10px auto;
-				border: 1px solid #ccc;
-				border-radius: 5px;
-				font-size: 14px;
-				width: calc(100% - 40px);
+    input,
+    button {
+      padding: 12px;
+      border-radius: 5px;
+      font-size: 14px;
+      width: 100%;
+      margin: 10px 0;
+      box-sizing: border-box;
+    }
 
-				&:focus {
-					border-color: #4a90e2;
-					outline: none;
-					box-shadow: 0 0 4px rgba(74, 144, 226, 0.3);
-				}
-			}
+    input {
+      border: 1px solid #ccc;
 
-			button {
-				background-color: #4a90e2;
-				color: #fff;
-				border: none;
-				padding: 12px 20px;
-				border-radius: 5px;
-				cursor: pointer;
-				font-size: 16px;
-				margin-top: 20px;
-				transition: background-color 0.3s;
+      &:focus {
+        border-color: #4a90e2;
+        outline: none;
+        box-shadow: 0 0 4px rgba(74, 144, 226, 0.3);
+      }
+    }
 
-				&:hover {
-					background-color: #357abd;
-				}
+    button {
+      background-color: #be4cd8;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: background-color 0.3s;
 
-				&:active {
-					background-color: #2b5e92;
-				}
-			}
-		}
-	}
+      &:hover {
+        background-color: #357abd;
+      }
 
-	@media (max-width: 480px) {
-		.register-box {
-			width: 90%;
-			padding: 20px;
-		}
-	}
+      &:active {
+        background-color: #2b5e92;
+      }
+    }
+  }
+
+  @media (max-width: 480px) {
+    .register-box {
+      width: 90%;
+      padding: 20px;
+
+      input,
+      button {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+
 </style>

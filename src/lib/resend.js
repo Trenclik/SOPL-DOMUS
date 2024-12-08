@@ -4,7 +4,7 @@ const { SECRET_RESEND_API_KEY, BASE_URL } = process.env; // Load environment var
 
 export async function sendVerificationEmail(to, nickname, token) {
 	const subject = 'Verify Your Email';
-	const verifyLink = `${BASE_URL}/verify?token=${token}`; // Dynamic link based on BASE_URL
+	const verifyLink = `${BASE_URL}/Verify?token=${token}`; // Dynamic link based on BASE_URL
 	const htmlContent = `
 		Hello ${nickname},<br>
 		Please verify your email by clicking on the following link: 

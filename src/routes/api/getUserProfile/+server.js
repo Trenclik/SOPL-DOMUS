@@ -1,31 +1,37 @@
-import { db } from '$lib/server/db';
-import { usersTable } from '$lib/server/db/schema.js';
-import { parse } from 'cookie';
-import { eq } from 'drizzle-orm';
-
-export async function GET({ request }) {
-	const cookies = parse(request.headers.get('cookie') || '');
-	const userId = cookies.session;
-
-	if (!userId) {
-		return new Response(JSON.stringify({ message: 'Unauthorized' }), { status: 401 });
-	}
-
+export async function POST({ request }) {
 	try {
-		// Fetch user by session ID
-		const user = await db.select().from(usersTable).where(eq(usersTable.id, userId)).get();
+		const formData = await request.formData();
+		const nickname = formData.get('nickname');
+		const password = formData.get('password');
 
-		if (!user) {
-			return new Response(JSON.stringify({ message: 'User not found' }), { status: 404 });
+		if (!nickname || !password) {
+			return new Response(JSON.stringify({ success: false, message: 'Invalid input' }), { status: 400 });
 		}
 
-		// Return user profile
-		return new Response(
-			JSON.stringify({ profileImage: user.profileImage, nickname: user.nickname }),
-			{ status: 200 }
-		);
+		const user = await db.select().from(usersTable).where(eq(usersTable.nickname, nickname)).get();
+
+		if (!user || !(await bcrypt.compare(password, user.passwordHash))) {
+			return new Response(JSON.stringify({ success: false, message: 'Invalid credentials' }), { status: 401 });
+		}
+
+		// Set the user as online
+		await db.update(usersTable).set({ isOnline: 1 }).where(eq(usersTable.id, user.id)).run();
+
+		// Create session cookie
+		const sessionCookie = serialize('session', user.id.toString(), {
+			httpOnly: true,
+			secure: true, // Ensure this is true in production (HTTPS)
+			sameSite: 'strict',
+			path: '/',
+			maxAge: 60 * 60 * 24 * 30, // 30 days
+		});
+
+		return new Response(JSON.stringify({ success: true, message: 'Login successful' }), {
+			status: 200,
+			headers: { 'Set-Cookie': sessionCookie },
+		});
 	} catch (error) {
-		console.error('Error fetching user profile:', error);
-		return new Response(JSON.stringify({ message: 'Internal Server Error' }), { status: 500 });
+		console.error('Login error:', error);
+		return new Response(JSON.stringify({ success: false, message: 'Internal Server Error' }), { status: 500 });
 	}
 }

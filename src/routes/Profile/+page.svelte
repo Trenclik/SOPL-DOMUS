@@ -1,11 +1,9 @@
 <script>
-    import { onMount } from 'svelte';
+    let user = $state(null);
+    let loading = $state(true);
+    let errorMessage = $state('');
   
-    let user = null;
-    let loading = true;
-    let errorMessage = '';
-  
-    onMount(async () => {
+    $effect(async () => {
       try {
         const response = await fetch('/Profile', { method: 'GET' });
   
@@ -70,6 +68,9 @@
   
     button:hover {
       background-color: #357abd;
+    }
+    img{
+      max-width: 100%;
     }
   </style>
   
