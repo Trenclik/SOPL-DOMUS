@@ -14,10 +14,10 @@
           user = await response.json();
         } else {
           goto("/Login")
-          errorMessage = 'Failed to load user profile.';
+          errorMessage = 'Chyba při načtení profilu';
         }
       } catch (error) {
-        errorMessage = 'Error fetching profile data.';
+        errorMessage = 'Chyba při získání dat profilu';
       } finally {
         loading = false;
       }

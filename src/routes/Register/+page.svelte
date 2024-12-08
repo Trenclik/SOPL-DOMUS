@@ -20,7 +20,7 @@
           user = await response.json();
         }
       } catch (error) {
-        errorMessage = 'Error fetching profile data.';
+        errorMessage = 'Chyba při získávání dat profilu';
       } finally {
         loading = false;
       }
@@ -29,13 +29,13 @@
 	function validatePassword(password) {
 		const errors = [];
 		if (!/[A-Z]/.test(password)) {
-			errors.push('The password must contain at least one uppercase letter.');
+			errors.push('Heslo musí obsahovat aspoň jedno velké písmeno');
 		}
 		if (!/[0-9]/.test(password)) {
-			errors.push('The password must contain at least one number.');
+			errors.push('Heslo musí obsahovat aspoň jedno číslo');
 		}
 		if (password.length < 8) {
-			errors.push('The password must be at least 8 characters long.');
+			errors.push('Heslo musí obsahovat aspoň 8 znaků');
 		}
 		return errors;
 	}
@@ -46,7 +46,7 @@
 
 		// Validate password match
 		if (password !== confirmPassword) {
-			notification = 'Passwords do not match.';
+			notification = 'Hesla se neschodují';
 			return;
 		}
 
@@ -85,8 +85,8 @@
 				notification = errorResult.message;
 			}
 		} catch (error) {
-			console.error('Registration failed:', error);
-			notification = 'An unexpected error occurred. Please try again.';
+			console.error('Selhání registru', error);
+			notification = 'Došlo k neočekáváné chybě. Zkuste prosím znovu.';
 		}
 	}
 
@@ -111,10 +111,10 @@
 			{#if notification}
 				<div class="error-message" transition:fade>{notification}</div>
 			{/if}
-			<input type="text" bindvalue={username} placeholder="Username" />
+			<input type="text" bindvalue={username} placeholder="Uživatelské jmeno" />
 			<input type="email" bindvalue={email} placeholder="Email" />
-			<input type="password" bindvalue={password} placeholder="Password" />
-			<input type="password" bindvalue={confirmPassword} placeholder="Confirm Password" />
+			<input type="password" bindvalue={password} placeholder="Heslo" />
+			<input type="password" bindvalue={confirmPassword} placeholder="Potvrzení hesla"/>
 			<button onclick={register}>Register</button>
 		</div>
 	{/if}

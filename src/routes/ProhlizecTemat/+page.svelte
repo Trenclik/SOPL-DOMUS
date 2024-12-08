@@ -13,10 +13,10 @@
             if (response.ok) {
                 tema = await response.json();
             } else {
-                errorMessage = 'Failed to load themes.';
+                errorMessage = 'Nepovedlo se načíst témata.';
             }
         } catch (error) {
-            errorMessage = 'Error fetching theme data.';
+            errorMessage = 'Chyba při získávání dat témat ';
         } finally {
             loading = false;
         }

@@ -19,7 +19,7 @@
           user = await response.json();
         }
       } catch (error) {
-        errorMessage = 'Error fetching profile data.';
+        errorMessage = 'Chyba při načítání profilu.';
       } finally {
         loading = false;
       }
@@ -32,7 +32,7 @@
   
 	  // Handle the login logic
 	  if (!nickname || !password) {
-		errorMessage = 'Incorrect Nickname or Password';
+		errorMessage = 'Chybné uživátelské jméno nebo heslo';
 	  } else {
 		const formData = new FormData();
 		formData.append('nickname', nickname);
@@ -51,8 +51,8 @@
 			setTimeout(() => {
 			  window.location.href = '/Profile';
 			}, 1000);
-		  } else if (result.message === 'Please verify your email before logging in.') {
-			notification = 'The email has not been verified yet. Please verify it before logging in.';
+		  } else if (result.message === 'Prosím ověřte svůj email.') {
+			notification = 'Email nebyl prověřen, prověřte prvně svůj email než budete pokračovat.';
 		  } else {
 			notification = result.message;
 		  }
@@ -90,16 +90,16 @@
 				</div>
 			{/if}
 			<form onsubmit={handleSubmit}>
-				<input type="text" bind:value={nickname} placeholder="Nickname" required />
-				<input type="password" bind:value={password} placeholder="Password" required />
+				<input type="text" bind:value={nickname} placeholder="Uživatelské jméno" required />
+				<input type="password" bind:value={password} placeholder="Heslo" required />
 				<button type="submit">Login</button>
 			</form>
 			<div class="forgot-password">
-				<a href="/ForgotPass">Forgot password?</a>
+				<a href="/ForgotPass">Zapomenuté heslo?</a>
 			</div>
 			<div class="form-buttons">
-				<a href="/"><button>Home</button></a>
-				<a href="/Register"><button>Register</button></a>
+				<a href="/"><button>Domov</button></a>
+				<a href="/Register"><button>Registrace</button></a>
 			</div>
 		</div>
 	{/if}
