@@ -129,17 +129,18 @@
 
 <style lang="scss">
 .register-container {
-  display: grid;
-  place-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
   height: 100vh;
   background-image: url('/src//static//BackGround.svg');
-  margin: 0;
+  padding-bottom: 70px;
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
   font-family: 'Arial', sans-serif;
   box-sizing: border-box;
-  padding: 0;
 
   img {
     width: 150px;
@@ -149,10 +150,12 @@
   }
 
   .register-box {
-    display: grid;
-    gap: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
     background-color: rgba(255, 255, 255, 0.9);
-    padding: 20px;
+    padding: 10px;
     border-radius: 8px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     width: 90%;
