@@ -13,5 +13,9 @@
 <Footer data={data} />
 
 <style>
-
+  main{
+    position: relative;
+    top: 30px;
+    bottom: 50px;
+  }
 </style>

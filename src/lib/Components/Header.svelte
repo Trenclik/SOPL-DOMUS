@@ -18,7 +18,7 @@
         padding-right: 2px;
         background-color: rgb(145, 65, 138);
         a img{
-            width: 30px;
+            height: 30px;
             
         }
     }
