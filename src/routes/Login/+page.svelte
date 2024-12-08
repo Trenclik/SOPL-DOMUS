@@ -81,9 +81,6 @@
 
 	{:else}
 		<div class="login-box">
-			<button class="back-arrow" onclick={goBack} aria-label="Go back">&larr;</button>
-	{:else}
-		<div class="login-box">
 			<h2>Login</h2>
 			{#if errorMessage}
 				<div class="error-message">{errorMessage}</div>
