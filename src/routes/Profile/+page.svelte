@@ -52,12 +52,12 @@
     }
   
     h1 {
-      color: #333;
+      color: #ffffff;
     }
   
     p {
       font-size: 16px;
-      color: #666;
+      color: #ffffff;
     }
   
     button {

@@ -18,6 +18,7 @@
     top: 50px;
     bottom: 50px;
     background-image: url('/src//static//BackGround.svg');
+    background-attachment: fixed;
     min-height: 100vh;
     min-width: 100vw;
     background-size: cover;
