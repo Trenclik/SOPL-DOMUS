@@ -1,12 +1,12 @@
 <script>
     // Použití $props pro získání vlastností
-    let { nadpis = "Nadpis", obsah = "obsah", odkaz = "", star = "/star-uncolor.svg" } = $props();
+    let { nadpis = "Nadpis", obsah = "obsah", odkaz = "#", star = "./star_uncolor.svg" } = $props();
 
     // Funkce pro přepínání stavu hvězdy
     function toggleStar() {
-        star = star === "/star-uncolor.svg" 
-            ? "/star-color.svg" 
-            : "/star-uncolor.svg";
+        star = star === "./star_uncolor.svg" 
+            ? "./star-color.svg" 
+            : "./star_uncolor.svg";
     }
 </script>
 
@@ -27,14 +27,19 @@
 
 <style lang="scss">
     section {
+        width: 90%;
         display: flex;
-        flex-direction: column;
         div {
             display: flex;
             flex-direction: column;
-            button{
-                background-color: none;
-
+            button {
+                background: none;
+                border: none;
+                padding: 0;
+                cursor: pointer;
+                img {
+                    height: 30px;
+                }
             }
         }
     }

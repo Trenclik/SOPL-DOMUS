@@ -52,7 +52,9 @@
 
 <style lang="scss">
 .login-container {
-  display: grid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   place-items: center;
   height: 100vh;
   background-image: url('/src//static//BackGround.svg'); 
@@ -67,12 +69,14 @@
   img {
     width: 150px; 
     height: auto;
-    margin-bottom: 20px;
     z-index: 1; 
+    margin: 0;
   }
 
   .login-box {
-    display: grid;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     gap: 15px;
     background-color: rgba(255, 255, 255, 0.9); 
     padding: 20px;
