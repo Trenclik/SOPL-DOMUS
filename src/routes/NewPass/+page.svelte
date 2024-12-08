@@ -67,7 +67,6 @@ html, body {
   display: grid;
   place-items: center;
   height: 100vh;
-  background-image: url('/src/static/BackGround.svg');
   margin: 0;
   background-size: cover;
   background-position: center;

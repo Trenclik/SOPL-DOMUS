@@ -2,80 +2,79 @@
 	import { onMount } from 'svelte';
 
 	let email = '';
-	let password = '';
-	let nickname = '';
-	let rememberMe = false;
-	let notification = '';
-	let loginSuccess = false;
-	let errorMessage = '';
-	let user = null;
+	let password = $state('');
+	let nickname = $state('');
+	let rememberMe = $state(false);
+	let notification = $state('');
+	let loginSuccess = $state(false);
+	let errorMessage = $state('');
+	let user = $state(null);
 	let loading = true;
 
-	onMount(async () => {
-		try {
-			const response = await fetch('/Profile', { method: 'GET' });
-
-			if (response.ok) {
-				user = await response.json();
-			}
-		} catch (error) {
-			errorMessage = 'Error fetching profile data.';
-		} finally {
-			loading = false;
-		}
-	});
+	$effect(async () => {
+      try {
+        const response = await fetch('/Profile', { method: 'GET' });
+  
+        if (response.ok) {
+          user = await response.json();
+        }
+      } catch (error) {
+        errorMessage = 'Error fetching profile data.';
+      } finally {
+        loading = false;
+      }
+    });
 
 	const handleSubmit = async (event) => {
-		event.preventDefault();
-		notification = '';
-		errorMessage = '';
-
-		if (!nickname || !password) {
-			errorMessage = 'Incorrect Nickname or Password';
+	  event.preventDefault();
+	  notification = '';
+	  errorMessage = '';
+  
+	  // Handle the login logic
+	  if (!nickname || !password) {
+		errorMessage = 'Incorrect Nickname or Password';
+	  } else {
+		const formData = new FormData();
+		formData.append('nickname', nickname);
+		formData.append('password', password);
+		formData.append('rememberMe', rememberMe ? 'true' : 'false');
+  
+		const response = await fetch('/Login', {
+		  method: 'POST',
+		  body: formData,
+		});
+  
+		if (response.ok) {
+		  const result = await response.json();
+		  if (result.success) {
+			loginSuccess = true;
+			setTimeout(() => {
+			  window.location.href = '/Profile';
+			}, 1000);
+		  } else if (result.message === 'Please verify your email before logging in.') {
+			notification = 'The email has not been verified yet. Please verify it before logging in.';
+		  } else {
+			notification = result.message;
+		  }
 		} else {
-			const formData = new FormData();
-			formData.append('nickname', nickname);
-			formData.append('password', password);
-			formData.append('rememberMe', rememberMe ? 'true' : 'false');
-
-			const response = await fetch('/Login', {
-				method: 'POST',
-				body: formData,
-			});
-
-			if (response.ok) {
-				const result = await response.json();
-				if (result.success) {
-					loginSuccess = true;
-					setTimeout(() => {
-						window.location.href = '/Profile';
-					}, 1000);
-				} else if (result.message === 'Please verify your email before logging in.') {
-					notification = 'The email has not been verified yet. Please verify it before logging in.';
-				} else {
-					notification = result.message;
-				}
-			} else {
-				const errorResult = await response.json();
-				notification = errorResult.message;
-			}
+		  const errorResult = await response.json();
+		  notification = errorResult.message;
 		}
+	  }
 	};
-
 	const logout = async () => {
-		await fetch('/Logout', { method: 'POST' });
-		window.location.href = '/Login';
-	};
+      await fetch('/Logout', { method: 'POST' });
+      window.location.href = '/Login';
+    };
 </script>
 
 <div class="login-container">
-  <img src="./logo.png" alt="Logo" />
-
 	{#if user}
 		<div class="login-box">
 			<p>Already logged in</p>
 			<button onclick={logout}>Logout</button>
 		</div>
+
 	{:else}
 		<div class="login-box">
 			<h2>Login</h2>
@@ -86,13 +85,13 @@
 				<div class="notification">{notification}</div>
 			{/if}
 			{#if loginSuccess}
-				<div class="notification success">
+				<div class="notification" style="color: green">
 					Login successful! Redirecting to your profile...
 				</div>
 			{/if}
 			<form onsubmit={handleSubmit}>
-				<input type="text" bindvalue={nickname} placeholder="Nickname" required />
-				<input type="password" bindvalue={password} placeholder="Password" required />
+				<input type="text" bind:value={nickname} placeholder="Nickname" required />
+				<input type="password" bind:value={password} placeholder="Password" required />
 				<button type="submit">Login</button>
 			</form>
 			<div class="forgot-password">
@@ -111,7 +110,6 @@
   display: grid;
   place-items: center;
   height: 100vh;
-  background-image: url('/src//static//BackGround.svg'); 
   margin: 0;
   background-size: cover;
   background-position: center;

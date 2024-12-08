@@ -75,7 +75,7 @@
 				if (result.success) {
 					registrationSuccess = true;
 					setTimeout(() => {
-						goto('/login'); // Redirect to login after success
+						goto('/Login'); // Redirect to login after success
 					}, 1000);
 				} else {
 					notification = result.message;

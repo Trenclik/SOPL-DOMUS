@@ -1,13 +1,12 @@
 <script>
-	import { Schema } from './../../../node_modules/@vercel/static-config/node_modules/ajv/lib/types/index.ts';
     let { data, children } = $props();
 </script>
 <footer>
-    <img class="house" src="./house.svg" alt="">
-    <img class="lupa" src="./magnifying-glass.svg" alt="">
-    <img class="bublina" src="./speechbubble.svg" alt="">
-    <img class="bublina-clovek" src="./buble-person.svg" alt="">
-    {#if data.user}
+    <a href="/"><img class="house" src="./house.svg" alt=""></a>
+    <a href="/Search"><img class="lupa" src="./magnifying-glass.svg" alt=""></a>
+    <a href="/ProhlizecTemat"><img class="bublina" src="./speechbubble.svg" alt=""></a>
+    <a href="/Chat"><img class="bublina-clovek" src="./buble-person.svg" alt=""></a>
+    {#if data?.user}
         <a href="/Profile"><img src={data.user.profileImage} alt="User Profile"></a>
     {:else}
         <a href="/Login">Login</a>
