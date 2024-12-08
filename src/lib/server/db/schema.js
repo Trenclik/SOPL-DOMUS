@@ -16,3 +16,19 @@ export const usersTable = sqliteTable('users', {
     updatedAt: text('updated_at').default(sql`CURRENT_TIMESTAMP`).notNull(),
     profileImage: text('profile_image').default("https://static.vecteezy.com/system/resources/previews/009/292/244/non_2x/default-avatar-icon-of-social-media-user-vector.jpg"),
   });
+
+export const temata = sqliteTable('themes', {
+    id: integer('id').primaryKey(),
+    name: text('name').notNull(),
+    content: text('content').notNull(),
+    verified: integer('verified').default(0).notNull(),
+    createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`).notNull()
+});
+
+export const komentare = sqliteTable('coments', {
+    id: integer('id').primaryKey(),
+    themeId: integer('theme_id').references(() => temata.id).notNull(),
+    content: text('content').notNull(),
+    posterId: integer('poster_id').notNull(),
+    createdAt: text('created_at').default(sql`CURRENT_TIMESTAMP`).notNull()
+});

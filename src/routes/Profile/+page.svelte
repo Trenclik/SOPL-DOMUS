@@ -1,4 +1,7 @@
 <script>
+    import { goto } from "$app/navigation";
+    import { redirect } from "@sveltejs/kit";
+
     let user = $state(null);
     let loading = $state(true);
     let errorMessage = $state('');
@@ -10,6 +13,7 @@
         if (response.ok) {
           user = await response.json();
         } else {
+          goto("/Login")
           errorMessage = 'Failed to load user profile.';
         }
       } catch (error) {
