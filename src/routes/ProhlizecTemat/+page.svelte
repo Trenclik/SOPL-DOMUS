@@ -3,7 +3,7 @@
 
 </script>
 <section id="card_container">
-<Card nadpis="bruh", obsah="kokoti"/>
+<Card nadpis="Bruh", obsah="Bruh" odkaz="/Tema"/>
 </section>
 
 
@@ -13,5 +13,7 @@
         display: grid;
         justify-items: center;
     }
+
+    
      
 </style>
