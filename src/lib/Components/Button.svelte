@@ -4,7 +4,10 @@
       type = 'button',
       disabled = false,
       onClick = () => {},
+      color = ""
     } = $props();
+
+    let buttonClass = $derived(`${color} btn`);
   
     // Funkce volaná při kliknutí na tlačítko
     function handleClick(event) {
@@ -12,7 +15,7 @@
     }
   </script>
   
-  <button type={type} {disabled} class="btn" onclick={handleClick}>
+  <button type={type} {disabled} class={buttonClass} onclick={handleClick}>
     {label}
   </button>
   
@@ -36,6 +39,10 @@
     .btn:disabled {
       background-color: #ccc;
       cursor: not-allowed;
+    }
+
+    .purple{
+      background-color: #be4cd8;
     }
   </style>
   
