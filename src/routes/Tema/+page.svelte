@@ -49,10 +49,10 @@
     <div>
         <!-- Komentáře -->
     </div>
-    
-    <!-- Tlačítko -->
-    <button>+</button>
 </section>
+
+<!-- Tlačítko -->
+<button class="add-button">+</button>
 
 <style lang="scss">
     section {
@@ -107,15 +107,22 @@
         margin-top: 20px;
     }
 
-    button {
-        background-color: #007bff;
+    /* Absolutní pozicování pro tlačítko */
+    .add-button {
+        position: fixed;
+        bottom: 60px;  /* Odsazení od dolního okraje */
+        right: 15px;   /* Odsazení od pravého okraje */
+        background-color: #9000ff;
         color: white;
-        font-size: 18px;
+        font-size: 24px;
         border: none;
-        padding: 8px 16px;
-        border-radius: 4px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
         cursor: pointer;
-        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
         &:hover {
             background-color: #0056b3;
