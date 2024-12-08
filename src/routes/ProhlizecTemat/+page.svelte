@@ -30,7 +30,7 @@
       <p>{errorMessage}</p>
     {:else}
       {#each tema as t}
-        <Card nadpis={t.name} obsah={t.content} />
+        <Card nadpis={t.name} obsah={t.content} odkaz="/Tema" />
       {/each}
     {/if}
   </section>
