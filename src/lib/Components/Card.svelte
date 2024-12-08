@@ -1,14 +1,17 @@
 <script>
+    // Get properties using $props() with default values
     let { nadpis = "Nadpis", obsah = "obsah", odkaz = "#", star = "./star_uncolor.svg" } = $props();
-
+  
+    // Toggle star state
     function toggleStar() {
-        star = star === "./star_uncolor.svg" 
-            ? "./star-color.svg" 
-            : "./star_uncolor.svg";
+      star = star === "./star_uncolor.svg" 
+        ? "./star-color.svg" 
+        : "./star_uncolor.svg";
     }
-</script>
-
-<section>
+  </script>
+  
+  <section>
+    <!-- Link wrapping the card content -->
     <a href={odkaz}>
         <div id="text">
             <h3>{nadpis}</h3>
@@ -99,5 +102,28 @@
                 }
             }
         }
-    }
-</style>
+        p {
+          margin: 0;
+          font-size: 1rem;
+        }
+      }
+  
+      /* Container for the star button */
+      .star-button-container {
+        display: flex;
+        justify-content: flex-end; /* Align the button to the right */
+        align-items: center;
+      }
+  
+      button {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+      }
+  
+      img {
+        height: 30px;
+      }
+  </style>
+  
