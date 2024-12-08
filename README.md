@@ -7,7 +7,7 @@ použíjte pozadí pro login, registr a zapomenuté heslo nebo jméno či email
 
 [Univerzální pozadí po rozkliku](https://www.figma.com/design/qtgZVj9FQIN7jpBm8aepRH/Untitled?node-id=1-7&t=328IgHvQYmDzzVOb-1)
 
-[Main stránka & profil & Deník & Tipy+triky](https://www.figma.com/design/ZZuYEM1dJwzZnYvvrAEiXT/Untitled?node-id=0-1&t=RsEFISxyL4RMFvu7-1)
+[Main stránka & profil & Deník & Tipy+triky & Tutorial](https://www.figma.com/design/ZZuYEM1dJwzZnYvvrAEiXT/Untitled?node-id=0-1&t=RsEFISxyL4RMFvu7-1)
 -Design HOTOVO
 
 [Header & vyhledávání & Footer](https://www.figma.com/design/LjbsWudTL74Osfk3rEh38q/Untitled?node-id=1-7&node-type=canvas&t=k9nFH0GKKUTAqRIv-0)
