@@ -69,5 +69,8 @@
     button:hover {
       background-color: #357abd;
     }
+    img{
+      max-width: 100%;
+    }
   </style>
   

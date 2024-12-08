@@ -62,10 +62,6 @@
 		}
 	  }
 	};
-  
-	const goBack = () => {
-	  window.history.back();
-	};
 	const logout = async () => {
       await fetch('/Logout', { method: 'POST' });
       window.location.href = '/Login';
