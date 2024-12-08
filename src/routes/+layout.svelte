@@ -15,7 +15,16 @@
 <style>
   main{
     position: relative;
-    top: 30px;
+    top: 50px;
     bottom: 50px;
+    background-image: url('/src//static//BackGround.svg');
+    min-height: 100vh;
+    min-width: 100vw;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Arial', sans-serif;
+    box-sizing: border-box;
   }
+  
 </style>

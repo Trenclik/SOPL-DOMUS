@@ -12,8 +12,8 @@
 
 <section>
     <a href={odkaz}>
-        <div>
-            <h1>{nadpis}</h1>
+        <div id="text">
+            <h3>{nadpis}</h3>
             <p>{obsah}</p>
         </div>
     </a>
@@ -26,9 +26,17 @@
 </section>
 
 <style lang="scss">
+    a{
+        width: 90%;
+        text-decoration: none;
+    }
     section {
         width: 90%;
         display: flex;
+        justify-content: space-around;
+        background-color: aqua;
+        border-radius: 20px;
+        padding: 5px;
         div {
             display: flex;
             flex-direction: column;
